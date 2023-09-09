@@ -1,20 +1,27 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { FormItem, ImageInput, Textarea } from './components'
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { FormItem, ImageInput, Textarea } from './components';
 
 interface FormProps {
   feedback: number,
-  image: string,
+  image: File;
   comment: string
 }
 
 const schema = yup
   .object()
   .shape({
-    comment: yup.string().required('O campo comentário é obrigatório'),
-    image: yup.string().required('O campo imagem é obrigatório'),
-    feedback: yup.number().required('O campo Feedback é obrigatório'),
+    comment: yup
+      .string()
+      .required('O campo comentário é obrigatório'),
+    image: yup
+      .mixed()
+      .required("O campo imagem é obrigatório")
+      .test('is-valid-size', "O campo de imagem deve conter uma imagem com até 2MB", value => value[0]?.size <= 10000 * 2000),
+    feedback: yup
+      .number()
+      .required('O campo Feedback é obrigatório'),
   })
   .required()
 
@@ -65,7 +72,8 @@ const App = () => {
         </FormItem>
         <FormItem message={errors.image?.message} label='Imagem'>
           <ImageInput
-            accept='image/png, image/jpeg, image/jpg'
+            multiple={false}
+            accept='image/png, image/jpeg'
             {...register('image')}
           />
         </FormItem>

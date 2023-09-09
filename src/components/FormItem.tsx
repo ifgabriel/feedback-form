@@ -9,7 +9,7 @@ const FormItem = forwardRef<HTMLDivElement, FormItemProps>(({ children, label, m
     <div {...props} className='flex flex-col gap-2 w-full' ref={ref}>
         <label className='text-slate-500 font-lg text-lg'>{label}</label>
         {children}
-        <span className='text-red-500 mt-2'>{message}</span>
+        <span className='text-red-500 mt-2 h-4'>{message}</span>
     </div>
 ))
 
