@@ -11,13 +11,6 @@ const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>(
       className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 hover:bg-slate-100 overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center pb-6 pt-5">
-        {previewImage && (
-          <img
-            className="object-fill h-full w-full rounded-lg"
-            src={URL.createObjectURL(previewImage)}
-            alt="Pré visualização da imagem"
-          />
-        )}
         <div className={['flex flex-col items-center justify-center pb-6 pt-5 text-slate-500', previewImage && "absolute text-slate-100"].join(' ')}>
            <svg
               className="mb-4 h-8 w-8"

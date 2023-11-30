@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FormItem, ImageInput, Input, Textarea } from "./components";
 import { useState } from "react";
+import useCreateFeedback from "../../services/useCreateFeedback";
 
 interface FormProps {
   feedback: number;
@@ -40,11 +41,11 @@ const Form = () => {
   } = useForm<FormProps>({
     resolver: yupResolver(schema),
   });
-
+  const { mutate } = useCreateFeedback()
   return (
     <form
       className="container mx-auto rounded-md bg-white px-10 py-8"
-      onSubmit={handleSubmit((data) => console.log("Form sent with", data))}
+      onSubmit={handleSubmit((data) => mutate({...data, image: "image"}))}
     >
       <h1 className="mt-6 mb-12 text-center text-3xl font-medium text-slate-800">
         O que você achou do produto?

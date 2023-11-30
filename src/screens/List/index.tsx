@@ -1,6 +1,7 @@
-import { data } from "./utils";
+import useGetFeedbacks from "../../services/useGetFeedbacks";
 
 const handleFeedbackRating = (rating: number) => {
+
   const ratings: Record<number, string> = {
     0: "Muito ruim",
     1: "Ruim",
@@ -13,13 +14,15 @@ const handleFeedbackRating = (rating: number) => {
 };
 
 const List = () => {
+  const { data } = useGetFeedbacks()
+
   return (
     <main className="container mx-auto rounded-md bg-white px-10 py-8">
       <h1 className="mb-12 mt-6 text-center text-3xl font-medium text-slate-800">
         Lista de todos os feedbacks
       </h1>
       <ul className="flex flex-col gap-6">
-        {data.map((feedback) => (
+        {data?.map((feedback) => (
           <li
             className="flex items-start gap-6 rounded p-6 border-b-slate-100 [&:not(:last-child)]:border-b"
             key={feedback.id}
